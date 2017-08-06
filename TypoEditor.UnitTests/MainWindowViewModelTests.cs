@@ -31,6 +31,28 @@
             Assert.AreEqual(UserSelectedPath, viewModel.PathToAnalyze);
         }
 
+        [TestMethod]
+        public void TestPathToAnalyze()
+        {
+            var viewModel = new MainWindowViewModel(new FakeMainWindow());
+            viewModel.PathToAnalyze = "a";
+            string name = null;
+            viewModel.PropertyChanged += (sender, e) => { name = e.PropertyName; };
+            viewModel.PathToAnalyze = "b";
+            Assert.AreEqual(nameof(viewModel.PathToAnalyze), name);
+        }
+
+        [TestMethod]
+        public void TestExtensionToAnalyze()
+        {
+            var viewModel = new MainWindowViewModel(new FakeMainWindow());
+            viewModel.ExtensionToAnalyze = "a";
+            string name = null;
+            viewModel.PropertyChanged += (sender, e) => { name = e.PropertyName; };
+            viewModel.ExtensionToAnalyze = "b";
+            Assert.AreEqual(nameof(viewModel.ExtensionToAnalyze), name);
+        }
+
         private class FakeMainWindow : IMainWindow
         {
             public string SelectFolder()
