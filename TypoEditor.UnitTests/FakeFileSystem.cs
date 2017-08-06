@@ -1,10 +1,22 @@
 ﻿namespace TypoEditor.UnitTests
 {
+    using System;
+    using System.Collections.Generic;
+
     public class FakeFileSystem : IFileSystem
     {
-        public string[] EnumerateFiles(string directory, string searchPattern)
+        private Dictionary<string, string> files;
+
+        public FakeFileSystem()
         {
-            return null;
+            this.files = new Dictionary<string, string>();
+            files.Add("a.cs", "HelloWorld");
+            files.Add("b.cs", "CruelWorld");
+        }
+
+        public IEnumerable<string> EnumerateFiles(string directory, string searchPattern)
+        {
+            return files.Keys;
         }
     }
 }

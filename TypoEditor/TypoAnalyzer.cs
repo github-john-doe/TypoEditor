@@ -1,6 +1,7 @@
 ﻿namespace TypoEditor
 {
     using System;
+    using System.Collections.Generic;
 
     public class TypoAnalyzer : ITypoAnalyzer
     {
@@ -18,7 +19,7 @@
 
         public void Analyze(string folder, string pattern)
         {
-            throw new NotImplementedException();
+            IEnumerable<string> files = this.fileSystem.EnumerateFiles(folder, pattern);
         }
     }
 }

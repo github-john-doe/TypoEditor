@@ -3,6 +3,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
 
+    [TestClass]
     public class TypoAnalyzerTests
     {
         [TestMethod]
@@ -18,6 +19,13 @@
                 return;
             }
             Assert.Fail("Expected ArgumentNullException is not thrown.");
+        }
+
+        [TestMethod]
+        public void TestAnalyze()
+        {
+            var analyzer = new TypoAnalyzer(new FakeFileSystem());
+            analyzer.Analyze(@"c:\dev", "*.cs");
         }
     }
 }
