@@ -6,14 +6,14 @@
     [TestClass]
     public class MainWindowViewModelTests
     {
-        private const string UserSelectedPath = @"c:\dev";
+        private FakeTypoAnalyzer fakeTypeAnalyzer;
 
         [TestMethod]
-        public void TestConstructorWithNullArgument()
+        public void TestConstructorWithNullView()
         {
             try
             {
-                new MainWindowViewModel(null);
+                new MainWindowViewModel(null, new FakeTypoAnalyzer());
             }
             catch (ArgumentNullException ex)
             {
@@ -24,17 +24,32 @@
         }
 
         [TestMethod]
+        public void TestConstructorWithNullAnalyzer()
+        {
+            try
+            {
+                new MainWindowViewModel(new FakeMainWindow(), null);
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual("analyzer", ex.ParamName);
+                return;
+            }
+            Assert.Fail("Expected ArgumentNullException is not thrown.");
+        }
+
+        [TestMethod]
         public void TestBrowseForFile()
         {
-            var viewModel = new MainWindowViewModel(new FakeMainWindow());
+            var viewModel = this.CreateViewModel();
             viewModel.OnBrowseButtonClicked();
-            Assert.AreEqual(UserSelectedPath, viewModel.PathToAnalyze);
+            Assert.AreEqual(Constants.UserSelectedPath, viewModel.PathToAnalyze);
         }
 
         [TestMethod]
         public void TestPathToAnalyze()
         {
-            var viewModel = new MainWindowViewModel(new FakeMainWindow());
+            var viewModel = this.CreateViewModel();
             viewModel.PathToAnalyze = "a";
             string name = null;
             viewModel.PropertyChanged += (sender, e) => { name = e.PropertyName; };
@@ -45,7 +60,7 @@
         [TestMethod]
         public void TestExtensionToAnalyze()
         {
-            var viewModel = new MainWindowViewModel(new FakeMainWindow());
+            var viewModel = this.CreateViewModel();
             viewModel.ExtensionToAnalyze = "a";
             string name = null;
             viewModel.PropertyChanged += (sender, e) => { name = e.PropertyName; };
@@ -56,17 +71,16 @@
         [TestMethod]
         public void TestAnalyze()
         {
-            var viewModel = new MainWindowViewModel(new FakeMainWindow());
+            var viewModel = this.CreateViewModel();
+            viewModel.OnBrowseButtonClicked();
             viewModel.OnAnalyzeButtonClicked();
+            fakeTypeAnalyzer.Verify(@"c:\dev", @"*.cs");
         }
 
-
-        private class FakeMainWindow : IMainWindow
+        private MainWindowViewModel CreateViewModel()
         {
-            public string SelectFolder()
-            {
-                return UserSelectedPath;
-            }
+            this.fakeTypeAnalyzer = new FakeTypoAnalyzer();
+            return new MainWindowViewModel(new FakeMainWindow(), fakeTypeAnalyzer);
         }
     }
 }

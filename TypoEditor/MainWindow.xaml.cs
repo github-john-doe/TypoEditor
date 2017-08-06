@@ -11,7 +11,7 @@
         public MainWindow()
         {
             this.InitializeComponent();
-            this.DataContext = this.viewModel = new MainWindowViewModel(this);
+            this.DataContext = this.viewModel = new MainWindowViewModel(this, new TypoAnalyzer(new FileSystem()));
         }
 
         public string SelectFolder()

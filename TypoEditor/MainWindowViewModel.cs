@@ -8,17 +8,23 @@
         private const string DefaultExtensionToAnalyze = "*.cs";
 
         private IMainWindow view;
+        private ITypoAnalyzer analyzer;
         private string pathToAnalyze;
         private string extensionToAnalyze;
 
-        public MainWindowViewModel(IMainWindow view)
+        public MainWindowViewModel(IMainWindow view, ITypoAnalyzer analyzer)
         {
             if (view == null)
             {
                 throw new ArgumentNullException("view");
             }
+            if (analyzer == null)
+            {
+                throw new ArgumentNullException("analyzer");
+            }
 
             this.view = view;
+            this.analyzer = analyzer;
             this.extensionToAnalyze = DefaultExtensionToAnalyze;
         }
 
@@ -59,6 +65,7 @@
 
         public void OnAnalyzeButtonClicked()
         {
+            this.analyzer.Analyze(this.PathToAnalyze, this.ExtensionToAnalyze);
         }
     }
 }
