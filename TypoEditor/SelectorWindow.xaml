@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="SelectorWindow" Height="300" Width="300">
     <StackPanel Orientation="Horizontal">
-        <ListBox ItemsSource="{Binding Path=Keywords}" />
+        <ListBox ItemsSource="{Binding Path=Keywords}" SelectedIndex="{Binding Path=SelectedKeywordIndex}" />
     </StackPanel>
 </Window>

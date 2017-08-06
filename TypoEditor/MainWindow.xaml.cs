@@ -13,6 +13,7 @@
         {
             this.InitializeComponent();
             this.DataContext = this.viewModel = new MainWindowViewModel(this, new TypoAnalyzer(new FileSystem()));
+            this.viewModel.PathToAnalyze = @"C:\Dev\TypoEditor";
         }
 
         public string SelectFolder()
