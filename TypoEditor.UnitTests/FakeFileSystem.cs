@@ -18,5 +18,10 @@
         {
             return files.Keys;
         }
+
+        public string ReadFile(string file)
+        {
+            return this.files[file];
+        }
     }
 }

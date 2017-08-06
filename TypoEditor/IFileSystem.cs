@@ -5,5 +5,7 @@
     public interface IFileSystem
     {
         IEnumerable<string> EnumerateFiles(string directory, string searchPattern);
+
+        string ReadFile(string file);
     }
 }

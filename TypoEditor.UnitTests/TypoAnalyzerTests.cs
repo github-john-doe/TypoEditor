@@ -27,7 +27,7 @@
         {
             var analyzer = new TypoAnalyzer(new FakeFileSystem());
             TypoAnalyzerResult result = analyzer.Analyze(@"c:\dev", "*.cs");
-            Assert.AreEqual(3, result.Keywords.Count());
+            Assert.IsTrue(Enumerable.SequenceEqual(new string[] { "cruel", "hello", "world" }, result.Keywords));
         }
     }
 }

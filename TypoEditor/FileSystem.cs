@@ -10,5 +10,10 @@
         {
             return Directory.EnumerateFiles(directory, searchPattern, SearchOption.AllDirectories);
         }
+
+        public string ReadFile(string file)
+        {
+            return File.ReadAllText(file);
+        }
     }
 }
