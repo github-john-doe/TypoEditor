@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TypoEditor
+﻿namespace TypoEditor
 {
+    using System;
+    using System.ComponentModel;
+
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private IMainWindow view;
@@ -22,19 +18,21 @@ namespace TypoEditor
             this.view = view;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public string PathToAnalyze
         {
             get
             {
                 return this.pathToAnalyze;
             }
+
             set
             {
                 this.pathToAnalyze = value;
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PathToAnalyze)));
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.PathToAnalyze)));
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnBrowseButtonClicked()
         {

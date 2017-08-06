@@ -22,16 +22,19 @@
 
         internal class WindowAdapter : System.Windows.Forms.IWin32Window
         {
-            private IntPtr _handle;
+            private IntPtr handle;
 
             public WindowAdapter(IntPtr handle)
             {
-                _handle = handle;
+                this.handle = handle;
             }
 
             public IntPtr Handle
             {
-                get { return _handle; }
+                get
+                {
+                    return this.handle;
+                }
             }
         }
     }

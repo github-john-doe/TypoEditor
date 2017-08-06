@@ -4,16 +4,13 @@
     using System.Windows.Forms;
     using System.Windows.Interop;
 
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window, IMainWindow
     {
         private MainWindowViewModel viewModel;
 
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.DataContext = this.viewModel = new MainWindowViewModel(this);
         }
 
