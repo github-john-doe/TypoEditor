@@ -18,11 +18,24 @@ namespace TypoEditor
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IMainWindow
     {
+        private MainWindowViewModel viewModel;
+
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = this.viewModel = new MainWindowViewModel(this);
+        }
+
+        public string SelectFolder()
+        {
+            return @"c:\dev";
+        }
+
+        private void OnBrowseButtonClicked(object sender, RoutedEventArgs e)
+        {
+            this.viewModel.OnBrowseButtonClicked();
         }
     }
 }
