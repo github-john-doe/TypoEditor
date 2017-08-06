@@ -9,12 +9,7 @@
 
         public TypoAnalyzer(IFileSystem fileSystem)
         {
-            if (fileSystem == null)
-            {
-                throw new ArgumentNullException("fileSystem");
-            }
-
-            this.fileSystem = fileSystem;
+            this.fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
         }
 
         public void Analyze(string folder, string pattern)

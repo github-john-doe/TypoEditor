@@ -7,7 +7,7 @@
     // https://stackoverflow.com/questions/315164/how-to-use-a-folderbrowserdialog-from-a-wpf-application
     internal static class WpfHelpers
     {
-        internal static string ShowSelectfFolderDialog(HwndSource source)
+        internal static string ShowSelectFolderDialog(HwndSource source)
         {
             FolderBrowserDialog dlg = new FolderBrowserDialog();
             if (dlg.ShowDialog(new WindowAdapter(source.Handle)) == DialogResult.OK)

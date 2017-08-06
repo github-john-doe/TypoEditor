@@ -14,17 +14,8 @@
 
         public MainWindowViewModel(IMainWindow view, ITypoAnalyzer analyzer)
         {
-            if (view == null)
-            {
-                throw new ArgumentNullException("view");
-            }
-            if (analyzer == null)
-            {
-                throw new ArgumentNullException("analyzer");
-            }
-
-            this.view = view;
-            this.analyzer = analyzer;
+            this.view = view ?? throw new ArgumentNullException(nameof(view));
+            this.analyzer = analyzer ?? throw new ArgumentNullException(nameof(analyzer));
             this.extensionToAnalyze = DefaultExtensionToAnalyze;
         }
 

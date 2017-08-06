@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace TypoEditor.UnitTests
+﻿namespace TypoEditor.UnitTests
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     public class FakeTypoAnalyzer : ITypoAnalyzer
     {
         private string folder;

@@ -16,7 +16,7 @@
 
         public string SelectFolder()
         {
-            return WpfHelpers.ShowSelectfFolderDialog(PresentationSource.FromVisual(this) as HwndSource);
+            return WpfHelpers.ShowSelectFolderDialog(PresentationSource.FromVisual(this) as HwndSource);
         }
 
         private void OnBrowseButtonClicked(object sender, RoutedEventArgs e)
