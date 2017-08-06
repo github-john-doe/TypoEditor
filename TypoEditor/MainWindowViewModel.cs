@@ -5,8 +5,11 @@
 
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        private const string DefaultExtensionToAnalyze = "*.cs";
+
         private IMainWindow view;
         private string pathToAnalyze;
+        private string extensionToAnalyze;
 
         public MainWindowViewModel(IMainWindow view)
         {
@@ -16,9 +19,24 @@
             }
 
             this.view = view;
+            this.extensionToAnalyze = DefaultExtensionToAnalyze;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public string ExtensionToAnalyze
+        {
+            get
+            {
+                return this.extensionToAnalyze;
+            }
+
+            set
+            {
+                this.extensionToAnalyze = value;
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.ExtensionToAnalyze)));
+            }
+        }
 
         public string PathToAnalyze
         {
