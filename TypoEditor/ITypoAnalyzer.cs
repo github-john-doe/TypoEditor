@@ -2,6 +2,6 @@
 {
     public interface ITypoAnalyzer
     {
-        void Analyze(string folder, string pattern);
+        TypoAnalyzerResult Analyze(string folder, string pattern);
     }
 }

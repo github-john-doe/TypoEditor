@@ -7,10 +7,11 @@
         private string folder;
         private string pattern;
 
-        public void Analyze(string folder, string pattern)
+        public TypoAnalyzerResult Analyze(string folder, string pattern)
         {
             this.folder = folder;
             this.pattern = pattern;
+            return null;
         }
 
         public void Verify(string expectedFolder, string expectedPattern)

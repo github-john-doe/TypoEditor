@@ -12,9 +12,10 @@
             this.fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
         }
 
-        public void Analyze(string folder, string pattern)
+        public TypoAnalyzerResult Analyze(string folder, string pattern)
         {
             IEnumerable<string> files = this.fileSystem.EnumerateFiles(folder, pattern);
+            return new TypoAnalyzerResult();
         }
     }
 }

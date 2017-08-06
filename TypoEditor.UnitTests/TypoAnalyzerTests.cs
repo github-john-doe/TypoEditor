@@ -2,6 +2,7 @@
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
+    using System.Linq;
 
     [TestClass]
     public class TypoAnalyzerTests
@@ -25,7 +26,8 @@
         public void TestAnalyze()
         {
             var analyzer = new TypoAnalyzer(new FakeFileSystem());
-            analyzer.Analyze(@"c:\dev", "*.cs");
+            TypoAnalyzerResult result = analyzer.Analyze(@"c:\dev", "*.cs");
+            Assert.AreEqual(3, result.Keywords.Count());
         }
     }
 }
