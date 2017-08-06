@@ -56,7 +56,8 @@
 
         public void OnAnalyzeButtonClicked()
         {
-            this.analyzer.Analyze(this.PathToAnalyze, this.ExtensionToAnalyze);
+            TypoAnalyzerResult result = this.analyzer.Analyze(this.PathToAnalyze, this.ExtensionToAnalyze);
+            this.view.ShowAnalyzeResult(result);
         }
     }
 }

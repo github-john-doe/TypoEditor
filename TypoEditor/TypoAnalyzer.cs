@@ -56,6 +56,7 @@
                     }
                 }
             }
+
             if (builder.Length > 0)
             {
                 result.AddOccurrence(builder.ToString(), file);

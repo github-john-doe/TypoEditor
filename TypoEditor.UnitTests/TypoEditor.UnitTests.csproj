@@ -51,9 +51,11 @@
     <Compile Include="FakeMainWindow.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="FakeFileSystem.cs" />
+    <Compile Include="FakeSelectorWindow.cs" />
     <Compile Include="FakeTypoAnalyzer.cs" />
     <Compile Include="MainWindowViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectorWindowViewModelTests.cs" />
     <Compile Include="TypoAnalyzerTests.cs" />
   </ItemGroup>
   <ItemGroup>

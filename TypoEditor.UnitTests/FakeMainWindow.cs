@@ -6,5 +6,9 @@
         {
             return Constants.UserSelectedPath;
         }
+
+        public void ShowAnalyzeResult(TypoAnalyzerResult result)
+        {
+        }
     }
 }
