@@ -23,5 +23,10 @@
         {
             this.viewModel.OnBrowseButtonClicked();
         }
+
+        private void OnAnalyzeButtonClicked(object sender, RoutedEventArgs e)
+        {
+            this.viewModel.OnAnalyzeButtonClicked();
+        }
     }
 }

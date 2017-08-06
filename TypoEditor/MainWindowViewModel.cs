@@ -56,5 +56,9 @@
         {
             this.PathToAnalyze = this.view.SelectFolder();
         }
+
+        public void OnAnalyzeButtonClicked()
+        {
+        }
     }
 }

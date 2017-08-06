@@ -11,6 +11,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -23,6 +24,10 @@
             </DockPanel>
             <TextBlock Grid.Row="1" Grid.Column="0">Extension to analyze:</TextBlock>
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=ExtensionToAnalyze, Mode=TwoWay}" />
+            <DockPanel Grid.Row="2" Grid.Column="1">
+                <Button DockPanel.Dock="Right"  Click="OnAnalyzeButtonClicked">Analyze</Button>
+                <TextBlock></TextBlock>
+            </DockPanel>
         </Grid>
     </StackPanel>
 </Window>

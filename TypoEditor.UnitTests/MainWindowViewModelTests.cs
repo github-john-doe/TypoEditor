@@ -53,6 +53,14 @@
             Assert.AreEqual(nameof(viewModel.ExtensionToAnalyze), name);
         }
 
+        [TestMethod]
+        public void TestAnalyze()
+        {
+            var viewModel = new MainWindowViewModel(new FakeMainWindow());
+            viewModel.OnAnalyzeButtonClicked();
+        }
+
+
         private class FakeMainWindow : IMainWindow
         {
             public string SelectFolder()
