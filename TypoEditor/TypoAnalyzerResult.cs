@@ -1,7 +1,7 @@
 ﻿namespace TypoEditor
 {
-    using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class TypoAnalyzerResult
     {
@@ -12,11 +12,11 @@
             this.keywordOccurrence = new SortedDictionary<string, HashSet<string>>();
         }
 
-        public IEnumerable<string> Keywords
+        public IEnumerable<KeywordOccurrences> Keywords
         {
             get
             {
-                return this.keywordOccurrence.Keys;
+                return this.keywordOccurrence.Select(k => new KeywordOccurrences { Keyword = k.Key });
             }
         }
 

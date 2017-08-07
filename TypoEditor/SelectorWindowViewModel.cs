@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Linq;
 
     public class SelectorWindowViewModel : INotifyPropertyChanged
     {
@@ -22,7 +23,7 @@
         {
             get
             {
-                return this.result.Keywords;
+                return this.result.Keywords.Select(t => t.Keyword);
             }
         }
 
