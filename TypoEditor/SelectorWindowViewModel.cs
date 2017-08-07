@@ -8,8 +8,9 @@
     public class SelectorWindowViewModel : INotifyPropertyChanged
     {
         private ISelectorWindow view;
-        private TypoAnalyzerResult result;
         private int selectedKeywordIndex;
+        private KeywordOccurrences[] keywordOccurrences;
+        private IEnumerable<string> occurrences;
 
         public SelectorWindowViewModel(ISelectorWindow view)
         {
@@ -23,7 +24,21 @@
         {
             get
             {
-                return this.result.Keywords.Select(t => t.Keyword);
+                return this.keywordOccurrences.Select(t => t.Keyword);
+            }
+        }
+
+        public IEnumerable<string> Occurrences
+        {
+            get
+            {
+                return this.occurrences;
+            }
+
+            set
+            {
+                this.occurrences = value;
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Occurrences)));
             }
         }
 
@@ -37,12 +52,14 @@
             set
             {
                 this.selectedKeywordIndex = value;
+                this.Occurrences = this.keywordOccurrences[this.selectedKeywordIndex].Occurrences;
             }
         }
 
         public void SetTypoAnalyzerResult(TypoAnalyzerResult result)
         {
-            this.result = result;
+            this.keywordOccurrences = result.Keywords.ToArray();
+            this.occurrences = this.keywordOccurrences[0].Occurrences;
         }
     }
 }

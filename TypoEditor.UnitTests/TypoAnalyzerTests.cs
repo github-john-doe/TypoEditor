@@ -31,6 +31,7 @@
             Assert.AreEqual("cruel", keywords[0].Keyword);
             Assert.AreEqual("hello", keywords[1].Keyword);
             Assert.AreEqual("world", keywords[2].Keyword);
+            Assert.IsTrue(Enumerable.SequenceEqual(new string[] { "b.cs" }, keywords[0].Occurrences));
         }
     }
 }

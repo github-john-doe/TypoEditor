@@ -31,5 +31,16 @@
             viewModel.SetTypoAnalyzerResult(typoAnalyzerResult);
             Assert.AreEqual(1, viewModel.Keywords.Count());
         }
+
+        [TestMethod]
+        public void TestOccurences()
+        {
+            SelectorWindowViewModel viewModel = new SelectorWindowViewModel(new FakeSelectorWindow());
+            viewModel.Occurrences = null;
+            string name = null;
+            viewModel.PropertyChanged += (sender, e) => { name = e.PropertyName; };
+            viewModel.Occurrences = new string[] { "x" };
+            Assert.AreEqual(nameof(viewModel.Occurrences), name);
+        }
     }
 }

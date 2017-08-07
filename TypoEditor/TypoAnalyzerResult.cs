@@ -16,7 +16,7 @@
         {
             get
             {
-                return this.keywordOccurrence.Select(k => new KeywordOccurrences { Keyword = k.Key });
+                return this.keywordOccurrence.Select(k => new KeywordOccurrences { Keyword = k.Key, Occurrences = k.Value });
             }
         }
 

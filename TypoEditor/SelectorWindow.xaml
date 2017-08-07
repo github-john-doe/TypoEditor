@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:TypoEditor"
         mc:Ignorable="d"
         Title="SelectorWindow" Height="300" Width="300">
-    <StackPanel Orientation="Horizontal">
-        <ListBox ItemsSource="{Binding Path=Keywords}" SelectedIndex="{Binding Path=SelectedKeywordIndex}" />
-    </StackPanel>
+    <DockPanel>
+        <ListBox DockPanel.Dock="Left" ItemsSource="{Binding Path=Keywords}" SelectedIndex="{Binding Path=SelectedKeywordIndex}" />
+        <ListBox DockPanel.Dock="Right" ItemsSource="{Binding Path=Occurrences}"/>
+    </DockPanel>
 </Window>
