@@ -8,6 +8,17 @@
         Title="SelectorWindow" Height="300" Width="300">
     <DockPanel>
         <ListBox DockPanel.Dock="Left" ItemsSource="{Binding Path=Keywords}" SelectedIndex="{Binding Path=SelectedKeywordIndex}" />
-        <ListBox DockPanel.Dock="Right" ItemsSource="{Binding Path=Occurrences}"/>
+        <ListBox DockPanel.Dock="Right" ItemsSource="{Binding Path=Occurrences}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="2">
+                        <Grid.InputBindings>
+                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ShowDetailCommand}"/>
+                        </Grid.InputBindings>
+                        <TextBlock Text="{Binding Name}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </DockPanel>
 </Window>

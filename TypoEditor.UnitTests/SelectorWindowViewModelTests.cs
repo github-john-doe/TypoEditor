@@ -39,7 +39,7 @@
             viewModel.Occurrences = null;
             string name = null;
             viewModel.PropertyChanged += (sender, e) => { name = e.PropertyName; };
-            viewModel.Occurrences = new string[] { "x" };
+            viewModel.Occurrences = new Item[] { new Item { } };
             Assert.AreEqual(nameof(viewModel.Occurrences), name);
         }
     }
