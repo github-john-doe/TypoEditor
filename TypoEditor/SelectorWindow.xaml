@@ -13,7 +13,7 @@
                 <DataTemplate>
                     <Grid Margin="2">
                         <Grid.InputBindings>
-                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ShowDetailCommand}"/>
+                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding DoubleClickCommand}"/>
                         </Grid.InputBindings>
                         <TextBlock Text="{Binding Name}" />
                     </Grid>
