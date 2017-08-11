@@ -69,6 +69,28 @@
         }
 
         [TestMethod]
+        public void TestCurrent()
+        {
+            var viewModel = this.CreateViewModel();
+            viewModel.Current = 0;
+            string name = null;
+            viewModel.PropertyChanged += (sender, e) => { name = e.PropertyName; };
+            viewModel.Current = 1;
+            Assert.AreEqual(nameof(viewModel.Current), name);
+        }
+
+        [TestMethod]
+        public void TestMaximum()
+        {
+            var viewModel = this.CreateViewModel();
+            viewModel.Maximum = 0;
+            string name = null;
+            viewModel.PropertyChanged += (sender, e) => { name = e.PropertyName; };
+            viewModel.Maximum = 1;
+            Assert.AreEqual(nameof(viewModel.Maximum), name);
+        }
+
+        [TestMethod]
         public void TestAnalyze()
         {
             var viewModel = this.CreateViewModel();
