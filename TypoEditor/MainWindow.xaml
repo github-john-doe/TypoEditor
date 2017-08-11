@@ -12,6 +12,7 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -28,6 +29,7 @@
                 <Button DockPanel.Dock="Right"  Click="OnAnalyzeButtonClicked">Analyze</Button>
                 <TextBlock></TextBlock>
             </DockPanel>
+            <ProgressBar Grid.Row="3" Grid.Column="0" Maximum="{Binding Path=Maximum}" Value="{Binding Path=Current}"/>
         </Grid>
     </StackPanel>
 </Window>

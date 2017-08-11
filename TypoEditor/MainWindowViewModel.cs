@@ -2,6 +2,8 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Threading;
+    using System.Windows.Threading;
 
     public class MainWindowViewModel : INotifyPropertyChanged
     {
@@ -56,8 +58,19 @@
 
         public void OnAnalyzeButtonClicked()
         {
-            TypoAnalyzerResult result = this.analyzer.Analyze(this.PathToAnalyze, this.ExtensionToAnalyze);
-            this.view.ShowAnalyzeResult(result);
+            Dispatcher d = Dispatcher.CurrentDispatcher;
+            ThreadPool.QueueUserWorkItem((x) =>
+            {
+                ((TypoAnalyzer)this.analyzer).SetMainWindowViewModel(this);
+                TypoAnalyzerResult result = this.analyzer.Analyze(this.PathToAnalyze, this.ExtensionToAnalyze);
+                d.BeginInvoke(new Action(() =>
+                {
+                    this.view.ShowAnalyzeResult(result);
+                }));
+            });
         }
+
+        int current; public int Current { get { return this.current; } set { this.current = value; this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Current))); } }
+        int maximum; public int Maximum { get { return this.maximum; } set { this.maximum = value; this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Maximum))); } }
     }
 }
