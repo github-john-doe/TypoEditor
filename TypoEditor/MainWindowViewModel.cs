@@ -13,6 +13,8 @@
         private ITypoAnalyzer analyzer;
         private string pathToAnalyze;
         private string extensionToAnalyze;
+        private int current;
+        private int maximum;
 
         public MainWindowViewModel(IMainWindow view, ITypoAnalyzer analyzer)
         {
@@ -51,6 +53,34 @@
             }
         }
 
+        public int Current
+        {
+            get
+            {
+                return this.current;
+            }
+
+            set
+            {
+                this.current = value;
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Current)));
+            }
+        }
+
+        public int Maximum
+        {
+            get
+            {
+                return this.maximum;
+            }
+
+            set
+            {
+                this.maximum = value;
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Maximum)));
+            }
+        }
+
         public void OnBrowseButtonClicked()
         {
             this.PathToAnalyze = this.view.SelectFolder();
@@ -58,19 +88,12 @@
 
         public void OnAnalyzeButtonClicked()
         {
-            Dispatcher d = Dispatcher.CurrentDispatcher;
             ThreadPool.QueueUserWorkItem((x) =>
             {
                 ((TypoAnalyzer)this.analyzer).SetMainWindowViewModel(this);
                 TypoAnalyzerResult result = this.analyzer.Analyze(this.PathToAnalyze, this.ExtensionToAnalyze);
-                d.BeginInvoke(new Action(() =>
-                {
-                    this.view.ShowAnalyzeResult(result);
-                }));
+                this.view.ShowAnalyzeResult(result);
             });
         }
-
-        int current; public int Current { get { return this.current; } set { this.current = value; this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Current))); } }
-        int maximum; public int Maximum { get { return this.maximum; } set { this.maximum = value; this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Maximum))); } }
     }
 }

@@ -58,7 +58,7 @@
 
         public void SetTypoAnalyzerResult(TypoAnalyzerResult result)
         {
-            this.keywordOccurrences = result.Keywords.ToArray();
+            this.keywordOccurrences = result.Keywords.OrderBy(t => t.Occurrences.Count()).ToArray();
             this.occurrences = this.keywordOccurrences[0].Occurrences.Select(o => new OccurrenceItemViewModel { Name = o });
         }
     }

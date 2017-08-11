@@ -24,10 +24,10 @@
         {
             var result = new TypoAnalyzerResult();
             string[] files = this.fileSystem.EnumerateFiles(folder, pattern).ToArray();
-            vm.Maximum = files.Length;
+            this.vm.Maximum = files.Length;
             foreach (var file in files)
             {
-                vm.Current++;
+                this.vm.Current++;
                 this.AnalyzeFile(file, result);
             }
 
