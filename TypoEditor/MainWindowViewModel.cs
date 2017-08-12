@@ -5,7 +5,7 @@
     using System.Threading;
     using System.Windows.Threading;
 
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : INotifyPropertyChanged, IProgressReporter
     {
         private const string DefaultExtensionToAnalyze = "*.cs";
 
@@ -88,12 +88,16 @@
 
         public void OnAnalyzeButtonClicked()
         {
-            ThreadPool.QueueUserWorkItem((x) =>
+            ThreadPool.QueueUserWorkItem((_) =>
             {
-                ((TypoAnalyzer)this.analyzer).SetMainWindowViewModel(this);
-                TypoAnalyzerResult result = this.analyzer.Analyze(this.PathToAnalyze, this.ExtensionToAnalyze);
-                this.view.ShowAnalyzeResult(result);
+                OnAnalyzeButtonClickedWorker();
             });
+        }
+
+        public void OnAnalyzeButtonClickedWorker()
+        {
+            TypoAnalyzerResult result = this.analyzer.Analyze(this.PathToAnalyze, this.ExtensionToAnalyze, this);
+            this.view.ShowAnalyzeResult(result);
         }
     }
 }

@@ -7,7 +7,7 @@
         private string folder;
         private string pattern;
 
-        public TypoAnalyzerResult Analyze(string folder, string pattern)
+        public TypoAnalyzerResult Analyze(string folder, string pattern, IProgressReporter progressReporter)
         {
             this.folder = folder;
             this.pattern = pattern;

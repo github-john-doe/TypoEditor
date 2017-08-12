@@ -25,8 +25,9 @@
         [TestMethod]
         public void TestAnalyze()
         {
+            FakeProgressReporter progressReporter = new FakeProgressReporter();
             var analyzer = new TypoAnalyzer(new FakeFileSystem());
-            TypoAnalyzerResult result = analyzer.Analyze(@"c:\dev", "*.cs");
+            TypoAnalyzerResult result = analyzer.Analyze(@"c:\dev", "*.cs", progressReporter);
             KeywordOccurrences[] keywords = result.Keywords.ToArray();
             Assert.AreEqual("cruel", keywords[0].Keyword);
             Assert.AreEqual("hello", keywords[1].Keyword);

@@ -7,26 +7,20 @@
     public class TypoAnalyzer : ITypoAnalyzer
     {
         private IFileSystem fileSystem;
-        private MainWindowViewModel vm;
 
         public TypoAnalyzer(IFileSystem fileSystem)
         {
             this.fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
         }
 
-        public void SetMainWindowViewModel(MainWindowViewModel vm)
-        {
-            this.vm = vm;
-        }
-
-        public TypoAnalyzerResult Analyze(string folder, string pattern)
+        public TypoAnalyzerResult Analyze(string folder, string pattern, IProgressReporter progressReporter)
         {
             var result = new TypoAnalyzerResult();
             string[] files = this.fileSystem.EnumerateFiles(folder, pattern).ToArray();
-            this.vm.Maximum = files.Length;
+            progressReporter.Maximum = files.Length;
             foreach (var file in files)
             {
-                this.vm.Current++;
+                progressReporter.Current++;
                 this.AnalyzeFile(file, result);
             }
 

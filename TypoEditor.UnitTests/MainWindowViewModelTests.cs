@@ -95,7 +95,7 @@
         {
             var viewModel = this.CreateViewModel();
             viewModel.OnBrowseButtonClicked();
-            viewModel.OnAnalyzeButtonClicked();
+            viewModel.OnAnalyzeButtonClickedWorker();
             fakeTypeAnalyzer.Verify(@"c:\dev", @"*.cs");
         }
 

@@ -51,6 +51,7 @@
     <Compile Include="FakeMainWindow.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="FakeFileSystem.cs" />
+    <Compile Include="FakeProgressReporter.cs" />
     <Compile Include="FakeSelectorWindow.cs" />
     <Compile Include="FakeTypoAnalyzer.cs" />
     <Compile Include="MainWindowViewModelTests.cs" />

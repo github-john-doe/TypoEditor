@@ -34,11 +34,14 @@
 
             public void Execute(object parameter)
             {
-                Process process = new Process();
-                ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = @"C:\windows\system32\notepad.exe";
-                processStartInfo.Arguments = this.item.Name;
-                process.StartInfo = processStartInfo;
+                Process process = new Process
+                {
+                    StartInfo = new ProcessStartInfo()
+                    {
+                        FileName = @"C:\windows\system32\notepad.exe",
+                        Arguments = this.item.Name
+                    }
+                };
                 process.Start();
             }
         }

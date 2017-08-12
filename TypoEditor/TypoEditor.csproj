@@ -71,6 +71,7 @@
     <Compile Include="FileSystem.cs" />
     <Compile Include="IFileSystem.cs" />
     <Compile Include="IMainWindow.cs" />
+    <Compile Include="IProgressReporter.cs" />
     <Compile Include="ISelectorWindow.cs" />
     <Compile Include="ITypoAnalyzer.cs" />
     <Compile Include="KeywordOccurrences.cs" />
