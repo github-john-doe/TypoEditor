@@ -19,13 +19,18 @@
         private class ViewFileCommand : ICommand
         {
             private OccurrenceItemViewModel item;
+            private EventHandler canExecuteChanged;
 
             public ViewFileCommand(OccurrenceItemViewModel item)
             {
                 this.item = item;
             }
 
-            public event EventHandler CanExecuteChanged;
+            public event EventHandler CanExecuteChanged
+            {
+                add { this.canExecuteChanged += value; }
+                remove { this.canExecuteChanged -= value; }
+            }
 
             public bool CanExecute(object parameter)
             {
