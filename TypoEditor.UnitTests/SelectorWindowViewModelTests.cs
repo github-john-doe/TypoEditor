@@ -33,7 +33,7 @@
         }
 
         [TestMethod]
-        public void TestOccurences()
+        public void TestOccurrences()
         {
             SelectorWindowViewModel viewModel = new SelectorWindowViewModel(new FakeSelectorWindow());
             viewModel.Occurrences = null;

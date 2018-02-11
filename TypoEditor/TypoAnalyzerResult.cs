@@ -22,14 +22,14 @@
 
         public void AddOccurrence(string keyword, string file)
         {
-            HashSet<string> occurences;
-            if (!this.keywordOccurrence.TryGetValue(keyword, out occurences))
+            HashSet<string> occurrences;
+            if (!this.keywordOccurrence.TryGetValue(keyword, out occurrences))
             {
-                occurences = new HashSet<string>();
-                this.keywordOccurrence.Add(keyword, occurences);
+                occurrences = new HashSet<string>();
+                this.keywordOccurrence.Add(keyword, occurrences);
             }
 
-            occurences.Add(file);
+            occurrences.Add(file);
         }
     }
 }
