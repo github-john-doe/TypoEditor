@@ -14,7 +14,7 @@
         public MainWindow()
         {
             this.InitializeComponent();
-            this.DataContext = this.viewModel = new MainWindowViewModel(this, new TypoAnalyzer(new FileSystem()));
+            this.DataContext = this.viewModel = new MainWindowViewModel(this, new TypoAnalyzer(new FileSystem(), new CorrectWords()));
             this.viewModel.PathToAnalyze = @"C:\Dev\TypoEditor";
             this.dispatcher = Dispatcher.CurrentDispatcher;
         }

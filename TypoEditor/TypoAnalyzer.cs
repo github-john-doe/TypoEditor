@@ -7,10 +7,12 @@
     public class TypoAnalyzer : ITypoAnalyzer
     {
         private IFileSystem fileSystem;
+        private ICorrectWords correctWords;
 
-        public TypoAnalyzer(IFileSystem fileSystem)
+        public TypoAnalyzer(IFileSystem fileSystem, ICorrectWords correctWords)
         {
             this.fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
+            this.correctWords = correctWords ?? throw new ArgumentNullException(nameof(correctWords));
         }
 
         public TypoAnalyzerResult Analyze(string folder, string pattern, IProgressReporter progressReporter)
@@ -40,7 +42,12 @@
                     {
                         if (builder.Length > 0)
                         {
-                            result.AddOccurrence(builder.ToString(), file);
+                            string word = builder.ToString();
+                            if (!this.correctWords.IsWordCorrect(word))
+                            {
+                                result.AddOccurrence(word, file);
+                            }
+
                             builder.Clear();
                         }
 
@@ -53,7 +60,12 @@
                 {
                     if (builder.Length > 0)
                     {
-                        result.AddOccurrence(builder.ToString(), file);
+                        string word = builder.ToString();
+                        if (!this.correctWords.IsWordCorrect(word))
+                        {
+                            result.AddOccurrence(word, file);
+                        }
+
                         builder.Clear();
                     }
                 }
@@ -61,7 +73,12 @@
 
             if (builder.Length > 0)
             {
-                result.AddOccurrence(builder.ToString(), file);
+                string word = builder.ToString();
+                if (!this.correctWords.IsWordCorrect(word))
+                {
+                    result.AddOccurrence(word, file);
+                }
+
                 builder.Clear();
             }
         }

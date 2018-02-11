@@ -12,7 +12,7 @@
         {
             try
             {
-                var analyzer = new TypoAnalyzer(null);
+                var analyzer = new TypoAnalyzer(null, null);
             }
             catch (ArgumentNullException ex)
             {
@@ -26,7 +26,7 @@
         public void TestAnalyze()
         {
             FakeProgressReporter progressReporter = new FakeProgressReporter();
-            var analyzer = new TypoAnalyzer(new FakeFileSystem());
+            var analyzer = new TypoAnalyzer(new FakeFileSystem(), new FakeCorrectWords());
             TypoAnalyzerResult result = analyzer.Analyze(@"c:\dev", "*.cs", progressReporter);
             KeywordOccurrences[] keywords = result.Keywords.ToArray();
             Assert.AreEqual("cruel", keywords[0].Keyword);
