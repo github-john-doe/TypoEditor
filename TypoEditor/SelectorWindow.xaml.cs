@@ -7,12 +7,14 @@
     {
         private SelectorWindowViewModel viewModel;
         private IProcessLauncher processLauncher;
+        private IConfiguration configuration;
 
         public SelectorWindow()
         {
             this.InitializeComponent();
             this.DataContext = this.viewModel = new SelectorWindowViewModel(this);
             this.processLauncher = new ProcessLauncher();
+            this.configuration = new Configuration();
         }
 
         public IProcessLauncher ProcessLauncher
@@ -20,6 +22,14 @@
             get
             {
                 return this.processLauncher;
+            }
+        }
+
+        public IConfiguration Configuration
+        {
+            get
+            {
+                return this.configuration;
             }
         }
 

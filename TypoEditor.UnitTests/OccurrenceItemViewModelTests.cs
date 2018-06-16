@@ -24,12 +24,14 @@
         [TestMethod]
         public void TestLaunchEditor()
         {
+            FakeConfiguration fakeConfiguration = new FakeConfiguration();
             FakeProcessLauncher fakeProcessLauncher = new FakeProcessLauncher();
-            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher);
+            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher, fakeConfiguration);
             OccurrenceItemViewModel viewModel = new OccurrenceItemViewModel(fakeSelectorWindow);
             viewModel.Name = "abc";
+            fakeConfiguration.Editor = "def";
             viewModel.DoubleClickCommand.Execute(null);
-            Assert.AreEqual(@"C:\Program Files\Sublime Text 3\sublime_text.exe", fakeProcessLauncher.Executable);
+            Assert.AreEqual("def", fakeProcessLauncher.Executable);
             Assert.AreEqual("abc", fakeProcessLauncher.Argument);
         }
     }

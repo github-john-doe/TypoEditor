@@ -25,8 +25,9 @@
         [TestMethod]
         public void TestSetTypoAnalyzerResult()
         {
+            IConfiguration fakeConfiguration = new FakeConfiguration();
             IProcessLauncher fakeProcessLauncher = new FakeProcessLauncher();
-            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher);
+            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher, fakeConfiguration);
             SelectorWindowViewModel viewModel = new SelectorWindowViewModel(fakeSelectorWindow);
             TypoAnalyzerResult typoAnalyzerResult = new TypoAnalyzerResult();
             typoAnalyzerResult.AddOccurrence("Hello", "a.cs");
@@ -37,8 +38,9 @@
         [TestMethod]
         public void TestOccurrences()
         {
+            IConfiguration fakeConfiguration = new FakeConfiguration();
             IProcessLauncher fakeProcessLauncher = new FakeProcessLauncher();
-            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher);
+            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher, fakeConfiguration);
             SelectorWindowViewModel viewModel = new SelectorWindowViewModel(fakeSelectorWindow);
             viewModel.Occurrences = null;
             string name = null;

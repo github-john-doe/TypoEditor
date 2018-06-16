@@ -48,6 +48,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FakeConfiguration.cs" />
     <Compile Include="FakeCorrectWords.cs" />
     <Compile Include="FakeMainWindow.cs" />
     <Compile Include="Constants.cs" />

@@ -8,7 +8,7 @@
     public class TypoAnalyzerTests
     {
         [TestMethod]
-        public void TestConstructorWithNull()
+        public void TestConstructorWithNullFileSystem()
         {
             try
             {
@@ -17,6 +17,21 @@
             catch (ArgumentNullException ex)
             {
                 Assert.AreEqual("fileSystem", ex.ParamName);
+                return;
+            }
+            Assert.Fail("Expected ArgumentNullException is not thrown.");
+        }
+
+        [TestMethod]
+        public void TestConstructorWithNullCorrectWords()
+        {
+            try
+            {
+                var analyzer = new TypoAnalyzer(new FakeFileSystem(), null);
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual("correctWords", ex.ParamName);
                 return;
             }
             Assert.Fail("Expected ArgumentNullException is not thrown.");

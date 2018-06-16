@@ -45,7 +45,7 @@
 
             public void Execute(object parameter)
             {
-                this.item.view.ProcessLauncher.LaunchProcess(@"C:\Program Files\Sublime Text 3\sublime_text.exe", this.item.Name);
+                this.item.view.ProcessLauncher.LaunchProcess(this.item.view.Configuration.Editor, this.item.Name);
             }
         }
     }
