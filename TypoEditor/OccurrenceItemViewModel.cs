@@ -1,11 +1,17 @@
 ﻿namespace TypoEditor
 {
     using System;
-    using System.Diagnostics;
     using System.Windows.Input;
 
     public class OccurrenceItemViewModel
     {
+        private ISelectorWindow view;
+
+        public OccurrenceItemViewModel(ISelectorWindow view)
+        {
+            this.view = view ?? throw new ArgumentNullException(nameof(view));
+        }
+
         public string Name { get; set; }
 
         public ICommand DoubleClickCommand
@@ -39,15 +45,7 @@
 
             public void Execute(object parameter)
             {
-                Process process = new Process
-                {
-                    StartInfo = new ProcessStartInfo()
-                    {
-                        FileName = @"C:\windows\system32\notepad.exe",
-                        Arguments = this.item.Name
-                    }
-                };
-                process.Start();
+                this.item.view.ProcessLauncher.LaunchProcess(@"C:\Program Files\Sublime Text 3\sublime_text.exe", this.item.Name);
             }
         }
     }

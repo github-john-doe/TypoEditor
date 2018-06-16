@@ -76,6 +76,7 @@
     <Compile Include="ICorrectWords.cs" />
     <Compile Include="IFileSystem.cs" />
     <Compile Include="IMainWindow.cs" />
+    <Compile Include="IProcessLauncher.cs" />
     <Compile Include="IProgressReporter.cs" />
     <Compile Include="ISelectorWindow.cs" />
     <Compile Include="ITypoAnalyzer.cs" />
@@ -92,6 +93,7 @@
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="OccurrenceItemViewModel.cs" />
+    <Compile Include="ProcessLauncher.cs" />
     <Compile Include="SelectorWindow.xaml.cs">
       <DependentUpon>SelectorWindow.xaml</DependentUpon>
     </Compile>

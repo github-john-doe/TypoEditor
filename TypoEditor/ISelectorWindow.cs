@@ -2,5 +2,6 @@
 {
     public interface ISelectorWindow
     {
+        IProcessLauncher ProcessLauncher { get; }
     }
 }

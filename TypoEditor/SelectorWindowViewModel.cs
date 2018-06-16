@@ -52,14 +52,14 @@
             set
             {
                 this.selectedKeywordIndex = value;
-                this.Occurrences = this.keywordOccurrences[this.selectedKeywordIndex].Occurrences.Select(o => new OccurrenceItemViewModel { Name = o });
+                this.Occurrences = this.keywordOccurrences[this.selectedKeywordIndex].Occurrences.Select(o => new OccurrenceItemViewModel(this.view) { Name = o });
             }
         }
 
         public void SetTypoAnalyzerResult(TypoAnalyzerResult result)
         {
             this.keywordOccurrences = result.Keywords.OrderBy(t => t.Occurrences.Count()).ToArray();
-            this.occurrences = this.keywordOccurrences[0].Occurrences.Select(o => new OccurrenceItemViewModel { Name = o });
+            this.occurrences = this.keywordOccurrences[0].Occurrences.Select(o => new OccurrenceItemViewModel(this.view) { Name = o });
         }
     }
 }

@@ -8,7 +8,7 @@
     public class SelectorWindowViewModelTests
     {
         [TestMethod]
-        public void TestConstructorWithNull()
+        public void TestConstructorWithNullView()
         {
             try
             {
@@ -25,7 +25,9 @@
         [TestMethod]
         public void TestSetTypoAnalyzerResult()
         {
-            SelectorWindowViewModel viewModel = new SelectorWindowViewModel(new FakeSelectorWindow());
+            IProcessLauncher fakeProcessLauncher = new FakeProcessLauncher();
+            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher);
+            SelectorWindowViewModel viewModel = new SelectorWindowViewModel(fakeSelectorWindow);
             TypoAnalyzerResult typoAnalyzerResult = new TypoAnalyzerResult();
             typoAnalyzerResult.AddOccurrence("Hello", "a.cs");
             viewModel.SetTypoAnalyzerResult(typoAnalyzerResult);
@@ -35,11 +37,13 @@
         [TestMethod]
         public void TestOccurrences()
         {
-            SelectorWindowViewModel viewModel = new SelectorWindowViewModel(new FakeSelectorWindow());
+            IProcessLauncher fakeProcessLauncher = new FakeProcessLauncher();
+            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher);
+            SelectorWindowViewModel viewModel = new SelectorWindowViewModel(fakeSelectorWindow);
             viewModel.Occurrences = null;
             string name = null;
             viewModel.PropertyChanged += (sender, e) => { name = e.PropertyName; };
-            viewModel.Occurrences = new OccurrenceItemViewModel[] { new OccurrenceItemViewModel { } };
+            viewModel.Occurrences = new OccurrenceItemViewModel[] { new OccurrenceItemViewModel(fakeSelectorWindow) { } };
             Assert.AreEqual(nameof(viewModel.Occurrences), name);
         }
     }
