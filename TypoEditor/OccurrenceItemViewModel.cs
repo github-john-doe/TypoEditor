@@ -45,7 +45,7 @@
 
             public void Execute(object parameter)
             {
-                this.item.view.ProcessLauncher.LaunchProcess(this.item.view.Configuration.Editor, this.item.Name);
+                this.item.view.ProcessLauncher.LaunchProcess(this.item.view.Configuration.Editor, string.Format(@"""{0}""", this.item.Name));
             }
         }
     }

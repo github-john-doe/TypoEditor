@@ -32,7 +32,7 @@
             fakeConfiguration.Editor = "def";
             viewModel.DoubleClickCommand.Execute(null);
             Assert.AreEqual("def", fakeProcessLauncher.Executable);
-            Assert.AreEqual("abc", fakeProcessLauncher.Argument);
+            Assert.AreEqual(@"""abc""", fakeProcessLauncher.Argument);
         }
     }
 }
