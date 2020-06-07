@@ -45,7 +45,14 @@
 
             public void Execute(object parameter)
             {
-                this.item.view.ProcessLauncher.LaunchProcess(this.item.view.Configuration.Editor, string.Format(@"""{0}""", this.item.Name));
+                if (this.item.view.FileSystem.Exists(this.item.view.Configuration.Editor))
+                {
+                    this.item.view.ProcessLauncher.LaunchProcess(this.item.view.Configuration.Editor, string.Format(@"""{0}""", this.item.Name));
+                }
+                else
+                {
+                    this.item.view.ErrorReporter.ReportError(string.Format("Configured editor '{0}' is not found.", this.item.view.Configuration.Editor));
+                }
             }
         }
     }

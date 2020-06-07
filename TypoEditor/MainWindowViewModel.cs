@@ -97,7 +97,10 @@
         public void OnAnalyzeButtonClickedWorker()
         {
             TypoAnalyzerResult result = this.analyzer.Analyze(this.PathToAnalyze, this.ExtensionToAnalyze, this);
-            this.view.ShowAnalyzeResult(result);
+            if (result != null)
+            {
+                this.view.ShowAnalyzeResult(result);
+            }
         }
     }
 }

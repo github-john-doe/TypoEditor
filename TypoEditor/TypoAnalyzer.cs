@@ -17,6 +17,11 @@
 
         public TypoAnalyzerResult Analyze(string folder, string pattern, IProgressReporter progressReporter)
         {
+            if (!this.fileSystem.Exists(folder))
+            {
+                return null;
+            }
+
             var result = new TypoAnalyzerResult();
             string[] files = this.fileSystem.EnumerateFiles(folder, pattern).ToArray();
             progressReporter.Maximum = files.Length;

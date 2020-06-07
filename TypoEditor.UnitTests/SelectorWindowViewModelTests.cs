@@ -27,7 +27,9 @@
         {
             IConfiguration fakeConfiguration = new FakeConfiguration();
             IProcessLauncher fakeProcessLauncher = new FakeProcessLauncher();
-            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher, fakeConfiguration);
+            IFileSystem fakeFileSystem = new FakeFileSystem();
+            IErrorReporter fakeErrorReporter = new FakeErrorReporter();
+            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher, fakeConfiguration, fakeFileSystem, fakeErrorReporter);
             SelectorWindowViewModel viewModel = new SelectorWindowViewModel(fakeSelectorWindow);
             TypoAnalyzerResult typoAnalyzerResult = new TypoAnalyzerResult();
             typoAnalyzerResult.AddOccurrence("Hello", "a.cs");
@@ -40,7 +42,9 @@
         {
             IConfiguration fakeConfiguration = new FakeConfiguration();
             IProcessLauncher fakeProcessLauncher = new FakeProcessLauncher();
-            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher, fakeConfiguration);
+            IFileSystem fakeFileSystem = new FakeFileSystem();
+            IErrorReporter fakeErrorReporter = new FakeErrorReporter();
+            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher, fakeConfiguration, fakeFileSystem, fakeErrorReporter);
             SelectorWindowViewModel viewModel = new SelectorWindowViewModel(fakeSelectorWindow);
             viewModel.Occurrences = null;
             string name = null;

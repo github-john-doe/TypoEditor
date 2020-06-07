@@ -22,17 +22,34 @@
         }
 
         [TestMethod]
-        public void TestLaunchEditor()
+        public void TestLaunchExistingEditor()
         {
             FakeConfiguration fakeConfiguration = new FakeConfiguration();
             FakeProcessLauncher fakeProcessLauncher = new FakeProcessLauncher();
-            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher, fakeConfiguration);
+            FakeFileSystem fakeFileSystem = new FakeFileSystem();
+            FakeErrorReporter fakeErrorReporter = new FakeErrorReporter();
+            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher, fakeConfiguration, fakeFileSystem, fakeErrorReporter);
             OccurrenceItemViewModel viewModel = new OccurrenceItemViewModel(fakeSelectorWindow);
             viewModel.Name = "abc";
-            fakeConfiguration.Editor = "def";
+            fakeConfiguration.Editor = "existingEditor";
             viewModel.DoubleClickCommand.Execute(null);
-            Assert.AreEqual("def", fakeProcessLauncher.Executable);
+            Assert.AreEqual("existingEditor", fakeProcessLauncher.Executable);
             Assert.AreEqual(@"""abc""", fakeProcessLauncher.Argument);
+        }
+
+        [TestMethod]
+        public void TestLaunchNonExistingEditor()
+        {
+            FakeConfiguration fakeConfiguration = new FakeConfiguration();
+            FakeProcessLauncher fakeProcessLauncher = new FakeProcessLauncher();
+            FakeFileSystem fakeFileSystem = new FakeFileSystem();
+            FakeErrorReporter fakeErrorReporter = new FakeErrorReporter();
+            ISelectorWindow fakeSelectorWindow = new FakeSelectorWindow(fakeProcessLauncher, fakeConfiguration, fakeFileSystem, fakeErrorReporter);
+            OccurrenceItemViewModel viewModel = new OccurrenceItemViewModel(fakeSelectorWindow);
+            viewModel.Name = "abc";
+            fakeConfiguration.Editor = "nonExistingEditor";
+            viewModel.DoubleClickCommand.Execute(null);
+            Assert.AreEqual(fakeErrorReporter.ReportedError, "Configured editor 'nonExistingEditor' is not found.");
         }
     }
 }

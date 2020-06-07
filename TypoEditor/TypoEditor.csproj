@@ -77,9 +77,11 @@
     </Compile>
     <Compile Include="Configuration.cs" />
     <Compile Include="CorrectWords.cs" />
+    <Compile Include="ErrorReporter.cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="IConfiguration.cs" />
     <Compile Include="ICorrectWords.cs" />
+    <Compile Include="IErrorReporter.cs" />
     <Compile Include="IFileSystem.cs" />
     <Compile Include="IMainWindow.cs" />
     <Compile Include="IProcessLauncher.cs" />
