@@ -93,10 +93,18 @@
         [TestMethod]
         public void TestAnalyze()
         {
-            var viewModel = this.CreateViewModel();
-            viewModel.OnBrowseButtonClicked();
-            viewModel.OnAnalyzeButtonClickedWorker();
-            fakeTypeAnalyzer.Verify(@"c:\dev", @"*.cs");
+            Recorder<IMainWindow> mainWindowRecorder = new Recorder<IMainWindow>();
+            mainWindowRecorder.Record((m) => m.SelectFolder(), Constants.UserSelectedPath);
+            IMainWindow mockMainWindow = mainWindowRecorder.Replay();
+            Recorder<ITypoAnalyzer> typoAnalyzerRecorder = new Recorder<ITypoAnalyzer>();
+
+            typoAnalyzerRecorder.Record((t) => t.Analyze(Constants.UserSelectedPath, "*.cs", /* 41a01ea348c4 this really should be mockMainWindow */null), null);
+            ITypoAnalyzer mockTypoAnalyzer = typoAnalyzerRecorder.Replay();
+            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(mockMainWindow, mockTypoAnalyzer);
+            mainWindowViewModel.OnBrowseButtonClicked();
+            mainWindowViewModel.OnAnalyzeButtonClickedWorker();
+            
+            // TODO: How about checking if the whole recording is over?
         }
 
         private MainWindowViewModel CreateViewModel()
