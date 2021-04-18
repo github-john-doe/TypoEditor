@@ -8,11 +8,12 @@
     public class CorrectWords : ICorrectWords
     {
         private ISet<string> correctWords;
+        private BkTree bktree;
 
         public CorrectWords()
         {
             this.correctWords = new HashSet<string>();
-
+            this.bktree = new BkTree();
             Assembly ex = Assembly.GetExecutingAssembly();
             var s = ex.GetManifestResourceStream("TypoEditor.words.json");
             var r = new StreamReader(s);
@@ -22,7 +23,13 @@
             {
                 string w = (string)((JValue)word).Value;
                 this.correctWords.Add(w);
+                this.bktree.Insert(w);
             }
+        }
+
+        public IEnumerable<string> GetRecommendCorrections(string typo)
+        {
+            return this.bktree.Query(typo, 2);
         }
 
         public bool IsWordCorrect(string s)

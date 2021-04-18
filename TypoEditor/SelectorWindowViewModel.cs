@@ -51,6 +51,7 @@
 
             set
             {
+                // TODO: Flow correctWords here so that it can be used to produce recommendations
                 this.selectedKeywordIndex = value;
                 this.Occurrences = this.keywordOccurrences[this.selectedKeywordIndex].Occurrences.Select(o => new OccurrenceItemViewModel(this.view) { Name = o });
             }
