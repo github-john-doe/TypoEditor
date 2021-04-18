@@ -6,6 +6,7 @@
     public class TypoAnalyzerResult
     {
         private SortedDictionary<string, HashSet<string>> keywordOccurrence;
+        private BkTree tree;
 
         public TypoAnalyzerResult()
         {
@@ -18,6 +19,16 @@
             {
                 return this.keywordOccurrence.Select(k => new KeywordOccurrences { Keyword = k.Key, Occurrences = k.Value });
             }
+        }
+
+        public IEnumerable<string> GetRecommendedCorrection(string typo)
+        {
+            return this.tree.Query(typo, 2);
+        }
+
+        public void SetTree(BkTree tree)
+        {
+            this.tree = tree;
         }
 
         public void AddOccurrence(string keyword, string file)

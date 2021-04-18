@@ -3,12 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Linq;
 
     public class SelectorWindowViewModel : INotifyPropertyChanged
     {
         private ISelectorWindow view;
         private int selectedKeywordIndex;
+        private TypoAnalyzerResult result;
         private KeywordOccurrences[] keywordOccurrences;
         private IEnumerable<OccurrenceItemViewModel> occurrences;
 
@@ -51,7 +53,12 @@
 
             set
             {
-                // TODO: Flow correctWords here so that it can be used to produce recommendations
+                string typo = this.keywordOccurrences[value].Keyword;
+                foreach (var correction in this.result.GetRecommendedCorrection(typo))
+                {
+                    Debug.WriteLine(typo + " -> " + correction);
+                }
+
                 this.selectedKeywordIndex = value;
                 this.Occurrences = this.keywordOccurrences[this.selectedKeywordIndex].Occurrences.Select(o => new OccurrenceItemViewModel(this.view) { Name = o });
             }
@@ -59,6 +66,7 @@
 
         public void SetTypoAnalyzerResult(TypoAnalyzerResult result)
         {
+            this.result = result;
             this.keywordOccurrences = result.Keywords.OrderBy(t => t.Occurrences.Count()).ToArray();
             this.occurrences = this.keywordOccurrences[0].Occurrences.Select(o => new OccurrenceItemViewModel(this.view) { Name = o });
         }

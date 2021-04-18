@@ -4,8 +4,8 @@
 
     public interface ICorrectWords
     {
-        bool IsWordCorrect(string s);
+        ISet<string> Words { get; }
 
-        IEnumerable<string> GetRecommendCorrections(string typo);
+        bool IsWordCorrect(string s);
     }
 }

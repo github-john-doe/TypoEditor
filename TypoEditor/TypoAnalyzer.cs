@@ -17,6 +17,12 @@
 
         public TypoAnalyzerResult Analyze(string folder, string pattern, IProgressReporter progressReporter)
         {
+            BkTree tree = new BkTree();
+            foreach (string word in this.correctWords.Words)
+            {
+                tree.Insert(word);
+            }
+
             if (!this.fileSystem.Exists(folder))
             {
                 return null;
@@ -31,6 +37,7 @@
                 this.AnalyzeFile(file, result);
             }
 
+            result.SetTree(tree);
             return result;
         }
 
